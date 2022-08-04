@@ -1,0 +1,3 @@
+/mnt/c/Users/12013/CLionProjects/SearchEngine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/12013/CLionProjects/SearchEngine/cmake-build-debug/CMakeFiles/SearchEngine.dir
+/mnt/c/Users/12013/CLionProjects/SearchEngine/cmake-build-debug/CMakeFiles/edit_cache.dir
