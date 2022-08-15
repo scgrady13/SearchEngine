@@ -12,6 +12,6 @@ AVLTree::AVLTree(const AVLTree & data){
 }
 
 
-void AVLTree::Insert(string &data){
-    PrivateInsert(data, this->root);
+void AVLTree::Insert(string &data, int id){
+    PrivateInsert(data, this->root, id);
 }
