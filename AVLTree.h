@@ -4,18 +4,19 @@
 
 #ifndef INC_22S_FINAL_PROJECT_SEAM_GRADY_AVLTREE_H
 #define INC_22S_FINAL_PROJECT_SEAM_GRADY_AVLTREE_H
-#include <string>;
-#include <iostream>;
+#include <string>
+#include <iostream>
 using namespace std;
 class AVLTree {
 private:
     struct Node {
 
         string word;
-        int count;
+        int count = 1;
         int height = 0;
         Node* right;
         Node* left;
+        int docID;
         Node(){
 
         }
@@ -27,18 +28,21 @@ private:
         ~Node(){
 
         }
+        void setDocID(int idIn) {docID = idIn;}
     };
     Node* root = nullptr;
+    int nodeCount{0};
 
-    void PrivateInsert(string &data, Node*& t){
+    void PrivateInsert(string &data, Node*& t, int id){
 
         if(t == nullptr) {
             t = new Node(data);
-
+            t->setDocID(id);
+            nodeCount++;
         } else if(data < t->word) {
-            PrivateInsert(data, t->left);
+            PrivateInsert(data, t->left, id);
         } else if(data > t->word) {
-            PrivateInsert(data, t->right);
+            PrivateInsert(data, t->right, id);
         } else {
             t->count++;
         }
@@ -75,7 +79,7 @@ private:
                 t = temp;
             }
         }
-        else if(getHeight(t->left) - getHeight(t->right) < 1) {
+        else if(getHeight(t->right) - getHeight(t->left) > 1) {
             //case 3
             if(getHeight(t->right->left) >= getHeight(t->right->right)) {
                 Node *temp = new Node();
@@ -102,9 +106,10 @@ private:
         t->height = max(getHeight(t->left), getHeight(t->right)) + 1;
     }
     void privatePrint(Node *& t){
+
         if(t != nullptr) {
             privatePrint(t->left);
-            cout<<t->word<<endl;
+            cout << t->word << " " << t->count << endl;
             privatePrint(t->right);
         }
     }
@@ -113,9 +118,10 @@ public:
         root = nullptr;
     }
     AVLTree(const AVLTree&);
-    void Insert(string&);
+    void Insert(string&, int);
     void printTree(){
         privatePrint(root);
+        cout << "qty: " <<  nodeCount << endl;
     }
 };
 
